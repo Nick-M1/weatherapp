@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/7db17794ab.js" crossorigin="anonymous"></script>
+    <style>
+        .icon-wind-direction {
+            height: 15pt;
+            margin-top: -3.5rem;
+        }
+        .wind-type{
+            margin-left: -1.4rem;
+        }
+        * {
+    </style>
+</head>
+<body>
+<div class="container-sm">
+    <div class="row mt-4">
+        <div class="">
+
+            <form role="search" id="form">
+                <input type="search" id="city_query" name="q" placeholder="Enter City Name..." aria-label="Search by city name">
+                <input type="search" id="country_query" name="q" placeholder="Enter Country..." aria-label="Search by country">
+                <button>
+                    <svg viewBox="0 0 1024 1024"><path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+                </button>
+            </form>
+            <script>
+                  const f = document.getElementById('form');
+                  const q_city = document.getElementById('city_query');
+                  const q_country = document.getElementById('country_query');
+                  const localhostURL = 'http://localhost:8080/api/v1/weather/current/';
+
+                  function submitted(event) {
+                    event.preventDefault();
+                    const url = localhostURL + q_city.value + "," + q_country.value ;
+                    const win = window.open(url, '_blank');
+                    win.focus();
+                  }
+
+                  f.addEventListener('submit', submitted);
+            </script>
+
+
+            <div class="location">
+                <p class="mb-1"><span th:text="${ currentWeather.weatherMain }"></span></p>
+                <h2>
+                    <span th:text="${ currentWeather.weatherMain }"></span> with
+                    <span th:text="${ currentWeather.weatherDescription }"></span>
+                </h2>
+                <h6 class="fw-light">
+                    <span th:text="${ currentWeather.cityName }"></span>,
+                    <span th:text="${ currentWeather.countryName }"></span>
+                </h6>
+            </div>
+            <div class="weather">
+                <div class="row weather-details">
+                    <div class="col-3">
+                        <p class="fw-light hwi-p">
+                            Max temp <span th:text="${currentWeather.tempMax}"></span>&#176;C &#183;
+                            Min temp <span th:text="${currentWeather.tempMin}"></span>&#176;C
+                        </p>
+                        <h1 class="mt-2"><span th:text="${currentWeather.tempNow}"></span>&#176;C</h1>
+                        <p class="fw-light">Feel like <span th:text="${currentWeather.feelsLike}"></span>&#176;C</p>
+                    </div>
+                    <div class="col">
+                        <img class="cwi" th:src="${currentWeather.weatherIcon}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="details">
+                <p class="fw-bolder">Current details</p>
+                <div>
+                    <table>
+                        <tr>
+                            <td class="fw-light">Humidity</td>
+                            <td><span th:text="${currentWeather.humidity}"></span>%</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-light">Pressure</td>
+                            <td><span th:text="${currentWeather.pressure}"></span>hPa</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-light">Visibility</td>
+                            <td><span th:text="${currentWeather.visibility}"></span>km</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+<!--            <hr>-->
+<!--            <div class="precipitation">-->
+<!--                <p class="fw-bolder">Precipitation</p>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td class="fw-light">Chance</td>-->
+<!--                        <td class="fw-light text-center hwi-p"><span th:text="${currentWeather.rainPossibility}"></span>%</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td></td>-->
+<!--                        <td class="text-center"><i class="fas fa-tint wind-speed"></i></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="fw-light">Volume(mm)</td>-->
+<!--                        <td class="fw-light text-center hwi-p"><span th:text="${hourly.rain}"></span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td></td>-->
+<!--                        <td class="hwi-p"><span th:text="${hourly.timeValue}"></span></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </div>-->
+            <hr>
+            <div class="wind">
+                <p class="fw-bolder">Wind</p>
+                <div class="wind-meter">
+                    <h1>
+                        <span class="wind-speed" th:text="${currentWeather.windSpeed}"></span>
+                        <span class="wind-meter fw-light">
+                            <svg data-v-47880d39="" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve"
+                                 class="icon-wind-direction" style="transform: rotate(${currentWeather.windDegree});"><g data-v-47880d39="" fill="#48484a">
+                                <path data-v-47880d39="" d="M510.5,749.6c-14.9-9.9-38.1-9.9-53.1,1.7l-262,207.3c-14.9,11.6-21.6,6.6-14.9-11.6L474,48.1c5-16.6,14.9-18.2,21.6,0l325,898.7c6.6,16.6-1.7,23.2-14.9,11.6L510.5,749.6z"></path><path
+                                    data-v-47880d39=""
+                                    d="M817.2,990c-8.3,0-16.6-3.3-26.5-9.9L497.2,769.5c-5-3.3-18.2-3.3-23.2,0L210.3,976.7c-19.9,16.6-41.5,14.9-51.4,0c-6.6-9.9-8.3-21.6-3.3-38.1L449.1,39.8C459,13.3,477.3,10,483.9,10c6.6,0,24.9,3.3,34.8,29.8l325,898.7c5,14.9,5,28.2-1.7,38.1C837.1,985,827.2,990,817.2,990z M485.6,716.4c14.9,0,28.2,5,39.8,11.6l255.4,182.4L485.6,92.9l-267,814.2l223.9-177.4C454.1,721.4,469,716.4,485.6,716.4z"></path></g>
+                            </svg>
+                        </span>
+                        <span class="wind-meter fw-light wind-type"> km/h</span>
+                    </h1>
+                </div>
+                <div class="mt-2">
+                    <p class="fw-light mb-0 hwi-p"><span th:text="${currentWeather.windSpeed}"></span> km/h</p>
+                    <p class="mb-0 hwi-p-temp"><i class="fas fa-wind wind-speed"></i></p>
+<!--                    <p class="hwi-p"><span th:text="${hourly.timeValue}"></span></p>-->
+                </div>
+            </div>
+            <hr>
+            <div class="sunCondition mb-7">
+                <p class="fw-bolder">Sunrise & sunset</p>
+                <div class="row weather-details">
+                    <div class="col-4">
+                        <p class="fw-lighter">Sunrise <br>
+                            <span class="fw-light" th:text="${currentWeather.sunriseTime}"></span>
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <p class="fw-lighter">Sunset <br>
+                            <span class="fw-light" th:text="${currentWeather.sunsetTime}"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
