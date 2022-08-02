@@ -1,8 +1,7 @@
 package com.nick.weatherapp.repo;
 
-import com.nick.weatherapp.CurrentWeather;
+import com.nick.weatherapp.entity.CurrentWeather;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 

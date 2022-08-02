@@ -1,6 +1,5 @@
 package com.nick.weatherapp.config;
 
-import com.nick.weatherapp.CurrentWeather;
 import com.nick.weatherapp.repo.WeatherRepository;
 import com.nick.weatherapp.service.LiveWeatherService;
 import org.springframework.boot.CommandLineRunner;

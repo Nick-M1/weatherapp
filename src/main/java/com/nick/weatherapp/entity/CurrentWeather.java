@@ -1,4 +1,4 @@
-package com.nick.weatherapp;
+package com.nick.weatherapp.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

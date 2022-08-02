@@ -1,11 +1,10 @@
 package com.nick.weatherapp.service;
 
-import com.nick.weatherapp.CurrentWeather;
+import com.nick.weatherapp.entity.CurrentWeather;
 import com.nick.weatherapp.service.FormatConverters.TimeConverter;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.TimeZone;
 
 @Service
 public class StubWeatherService {
