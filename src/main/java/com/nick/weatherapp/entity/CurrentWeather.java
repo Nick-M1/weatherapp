@@ -39,14 +39,14 @@ public class CurrentWeather {
 
     public CurrentWeather(){}
 
-    public CurrentWeather(Long id, String cityName, String countryName, Long timezone, String weatherMain, String weatherDescription, String weatherIconCode, BigDecimal tempNow, BigDecimal feelsLike, BigDecimal tempMax, BigDecimal tempMin, Integer pressure, Integer humidity, Long visibility, BigDecimal windSpeed, Integer windDegree, String sunriseTime, String sunsetTime) {
+    public CurrentWeather(Long id, String cityName, String countryName, Long timezone, String weatherMain, String weatherDescription, String weatherIcon, BigDecimal tempNow, BigDecimal feelsLike, BigDecimal tempMax, BigDecimal tempMin, Integer pressure, Integer humidity, Long visibility, BigDecimal windSpeed, Integer windDegree, String sunriseTime, String sunsetTime) {
         this.id = id;
         this.cityName = cityName;
         this.countryName = countryName;
         this.timezone = timezone;
         this.weatherMain = weatherMain;
         this.weatherDescription = weatherDescription;
-        this.weatherIcon = "http://openweathermap.org/img/wn/" + weatherIconCode + "@4x.png";
+        this.weatherIcon = weatherIcon;
         this.tempNow = tempNow;
         this.feelsLike = feelsLike;
         this.tempMax = tempMax;
@@ -89,7 +89,6 @@ public class CurrentWeather {
     public String getWeatherIcon() {
         return weatherIcon;
     }
-
 
     public BigDecimal getTempNow() {
         return tempNow;

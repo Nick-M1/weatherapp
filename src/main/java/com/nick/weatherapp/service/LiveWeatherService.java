@@ -61,7 +61,11 @@ public class LiveWeatherService {
 
                     root.path("weather").get(0).path("main").asText(),
                     root.path("weather").get(0).path("description").asText(),
-                    root.path("weather").get(0).path("icon").asText(),
+
+                    String.format(
+                        "http://openweathermap.org/img/wn/%s@4x.png",
+                        root.path("weather").get(0).path("icon").asText()
+                    ),
 
                     BigDecimal.valueOf(root.path("main").path("temp").asDouble()),
                     BigDecimal.valueOf(root.path("main").path("feels_like").asDouble()),
